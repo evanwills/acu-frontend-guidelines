@@ -1,10 +1,13 @@
 # Front-End Coding Standards (HTML & CSS)
 
-The following document outlines a reasonable style guide for CSS development. These guidelines strongly encourage the use of existing, common, sensible patterns. They should be adapted as needed to create your own style guide.
+This document is copied and adapted from [o3w-frontend-guidelines
+](https://github.com/o3world/o3w-frontend-guidelines) to meet ACU's Applications Team requirements and preferences.
+
+It outlines a reasonable style guide for CSS development. These guidelines strongly encourage the use of existing, common, sensible patterns. They should be adapted as needed to create your own style guide.
 
 ## Introduction
 
-This is a living document of Best Practices and Code Standards for Front-End Development at O3 World. The Development Team is encouraged to test, discuss, and evolve what is documented here together as best practices change and new ideas are shared. **Please implement and enforce these agreed upon standards in your own builds and in code reviews at all times for all projects.**
+This is a living document of Best Practices and Code Standards for Front-End Development at [ACU](http://www.acu.edu.au). The Development Team is encouraged to test, discuss, and evolve what is documented here together as best practices change and new ideas are shared. **Please implement and enforce these agreed upon standards in your own builds and in code reviews at all times for all projects.**
 
 > Well-formed markup is made up of part standards and part agreed upon preferences by a team of developers. Along with consistency, both are important in creating maintainable, readable code for everybody.
 
@@ -68,7 +71,8 @@ _Automation tools such as [Gulp](https://gulpjs.com/) are used to combine and mi
 ### Whitespace
 
 * Always be consistent in your use of whitespace using it to improve code readability.
-* Use soft tabs with four spaces.
+* Use soft tabs with two spaces.
+* HTML code should use hard tabs.
 
 _Our [.editorconfig](#editor-config) file helps with maintaining proper whitespace in different files._
 
@@ -84,7 +88,7 @@ HTML (Hyper Text Markup Language) acts as the Structure or skeleton for which ou
 
 * Browser Rendering Speed
 * Search Engine Optimization (SEO)
-* Accessibility (a11y)
+* Accessibility ([a11y](https://a11yproject.com/))
 * Validation
 * Usability
 
@@ -106,52 +110,54 @@ HTML5 provides us with lots of semantic elements aimed to describe precisely the
 ## Formatting
 
 * Attribute values, even numeric attributes, should be quoted. Even though quotes around attributes are optional, always put quotes around attributes for readability. Always use double quotes, never single quotes, on attributes.
-* **DO NOT** include a trailing slash in self-closing elements - the HTML5 spec defines this as optional. These self-closing elements include:
+* **ALWAYS** include a trailing slash in self-closing elements - the HTML5 spec defines this as optional. These self-closing elements include:
   * `<hr>`
   * `<br>`
   * `<input>`
   * `<img>`
+  * `<link>`
+  * `<meta>`
 * **DO NOT** omit optional closing tags (e.g. `</li>` or `</body>`).
 * Element and attribute names should all be lowercase.
-* Nested elements should be indented once (four spaces).
-* Classes are preferred over IDs when it comes to CSS references to avoid specificity issues. More details on [Class Naming Conventions](#class-naming-conventions) are below.
+* Nested elements should be indented once (tab).
+* Only use classes when it comes to CSS references to avoid specificity issues. Never use IDs. More details on [Class Naming Conventions](#class-naming-conventions) are below.
 
 ```html
 <!-- bad -->
 <body>
-  <img src='../path/file' alt='Alternative Text' />
+  <img src='../path/file' alt='Alternative Text'>
   <ul id='myList'>
     <li>
         This is the first part of some sample text before a break.
-        <br />
+        <br>
         More text after the break.
     <li>Just another list item in the middle of two others.
     <li>The final list item.
   </ul>
-  <hr />
+  <hr>
   <form>
     <label>Form Label</label>
-    <input type=text placeholder='Sample Input' />
-    <input type=submit value='Submit' />
+    <input type=text placeholder='Sample Input'>
+    <input type=submit value='Submit'>
   </form>
 
 <!-- good -->
 <body>
-    <img src="../path/file" alt="Alternative Text">
+    <img src="../path/file" alt="Alternative Text" />
     <ul class="my-list">
         <li>
             This is the first part of some sample text before a break.
-            <br>
+            <br />
             More text after the break.
         </li>
         <li>Just another list item in the middle of two others.</li>
         <li>The final list item.</li>
     </ul>
-    <hr>
+    <hr />
     <form>
         <label>Form Label</label>
-        <input type="text" placeholder="Sample Input">
-        <input type="submit" value="Submit">
+        <input type="text" placeholder="Sample Input" />
+        <input type="submit" value="Submit" />
     </form>
 </body>
 ```
@@ -177,7 +183,7 @@ Enforce standards mode and more consistent rendering in every browser possible w
 <a name="language-and-character-encoding"></a>
 ### Language and Character Encoding
 
-**From the HTML5 spec (`<html lang="en-us">`):**
+**From the HTML5 spec (`<html lang="en-gb">`):**
 
 > Authors are encouraged to specify a lang attribute on the root html element, giving the document's language. This aids speech synthesis tools to determine what pronunciations to use as well as aids translation tools to determine what rules to use.
 
@@ -185,7 +191,7 @@ Quickly and easily ensure proper rendering of your content by declaring an expli
 
 ```html
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-gb">
     <head>
         <meta charset="UTF-8">
         ...
@@ -202,7 +208,7 @@ Per the HTML5 spec, typically there is no need to specify a type when including 
 
 ```html
 <!-- external CSS -->
-<link rel="stylesheet" href="my-styles.css">
+<link rel="stylesheet" href="my-styles.css" />
 
 <!-- in-document CSS -->
 <style>
@@ -230,7 +236,7 @@ HTML attributes should come in this particular order for easier reading of code.
     Example Link
 </a>
 
-<input type="text" class="form-control">
+<input type="text" class="form-control" />
 
 <img src="..." class="..." alt="...">
 ```
@@ -253,9 +259,9 @@ XHTML required you to declare a value for all attributes, but HTML5 has no such 
 * formnovalidate
 
 ```html
-<input type="text" disabled>
+<input type="text" disabled />
 
-<input type="checkbox" value="1" checked>
+<input type="checkbox" value="1" checked />
 
 <select>
     <option value="1" selected>1</option>
@@ -284,7 +290,7 @@ Insert an ending comment after the closing tag of a long HTML section. This help
 <a name="accessibility"></a>
 ### Accessibility (a11y)
 
-Basic accessibility principles should be adhered to when writing HTML - it shouldn't be an afterthought. You don't have to be a [WCAG](https://www.w3.org/WAI/intro/wcag) expert and different clients have different requirements for level of support, but **basic accessibility support can have a huge impact.**
+Basic accessibility principles should be adhered to when writing HTML - it shouldn't be an afterthought. **Basic accessibility support can have a huge impact.** All ACU web projects need to meet [WCAG2](https://www.w3.org/WAI/WCAG20/glance/) level AA
 
 * Use `H1` - `H6` to properly order and identify headings.
 * In tables, use the `scope` attribute to associate header cells and data cells in data tables and use the `summary` attribute of the table element to give an overview of data tables.
@@ -321,10 +327,17 @@ Representing the Presentation layer of our Front-End Development, it’s importa
 <a name="scss-file-naming-and-organization"></a>
 ### File Naming and Organization
 
+Follow the principles of [Atomic Design](http://atomicdesign.bradfrost.com/) for organising your css/scss. Components should be divided into Atoms, Molecules, Organisms and pages.
+
+* A button would be an atom because it is the smallest styleable piece of a design.
+* A serch field would be a molecule becuse it contains an input field and a submit button.
+* A card/tile would be an organism. A carousel of card/tiles is also an organism
+* Whole designs like home, landing or news page are just grouped as _pages_
+
 Filenames should contain lowercase letters and words should be separated with a hyphen.
 
 * Within individual CSS/SCSS files, organize sections of code by component element.
-* Maintain a consistent commenting hierarchy for each section of code.
+* Maintain a consistent commenting hierarchy for each section of code. (See [scss comments](#scss-comments) below for more info.)
 * Use consistent white space to your advantage when separating sections of code for scanning larger documents.
 
 #### Global and Section-Specific SCSS
@@ -434,9 +447,11 @@ CSS/SCSS formatting decisions documented below are in place to ensure that code 
 * Each declaration should appear on its own line for more accurate error reporting.
 * End all declarations with a semicolon. The last declarations semicolon is optional, but your code is more error prone without it.
 * Comma-separated property values should include a space after each comma (e.g., `box-shadow`).
-* Don't include spaces after commas within `rgb()`, `rgba()`, `hsl()`, `hsla()`, or `rect()` values. This helps differentiate multiple color values (comma, no space) from multiple property values (comma with space).
-* Don't prefix property values or color parameters with a leading zero (e.g., `.5` instead of `0.5` and `-.5px` instead of `-0.5px`).
-* If you need transparency, use `rgba()`. Otherwise, always use the hexadecimal format.
+<!--* Don't include spaces after commas within `rgb()`, `rgba()`, `hsl()`, `hsla()`, or `rect()` values. This helps differentiate multiple color values (comma, no space) from multiple property values (comma with space). -->
+* Avoid using px values. Use REM values instead (Backwards compatibility will be handled by [PostCSS](https://github.com/postcss/postcss) in the build step.)
+* Don't prefix property values or color parameters with a leading zero (e.g., `.5` instead of `0.5` and `-.5rem` instead of `-0.5rem`).
+* ACU has strict requiremnts for its branding colour palate. Only used palate defined colour variables.
+* If you need transparency, use `rgba()`. Otherwise, always use colour variables.
 * Lowercase all hex values (e.g., `#fff`). Lowercase letters are much easier to discern when scanning a document as they tend to have more unique shapes.
 * Use shorthand hex values where available (e.g., `#fff` instead of `#ffffff`).
 * Use single quotes consistently (e.g., `content: '';`).
@@ -824,13 +839,16 @@ _`font-size` and `line-height` mixins are available and will generate a REM valu
 <a name="scss-comments"></a>
 ### Comments
 
-Well commented code is extremely important. Take time to describe components, how they work, their limitations, and the way they are constructed. Don't leave others in the team guessing as to the purpose of uncommon or non-obvious code.
+Well commented code is extremely important. Take time to describe components, how they work, their limitations, and the way they are constructed. Don't leave others in the team guessing as to the purpose of uncommon or non-obvious code. Comments are also used by [KSS](https://github.com/kss-node/kss/blob/spec/SPEC.md) to build a living style guide
 
-* Each SCSS partial should have a clear comment header to define the role of this section of code.
-* Place comments on a new line above their subject.
-* Keep line-length to a sensible maximum (e.g. 80 columns).
-* Make liberal use of comments to break SCSS code into discrete sections.
-* Use "sentence case" comments and consistent text indentation.
+* Each component should have a comment block to be included in the style guide.<br />
+  Style Guide comment blocks should have:
+  * A title
+  * A description _(where necessary)_
+  * `markup:` Full HTML markup for the component.
+  * A list of modifier classes
+  * `styleguide:` line to define where in the style guide's hierarchy the documentation should sit.
+* Use scss style comments to 
 
 ```css
 /*
