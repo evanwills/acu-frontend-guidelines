@@ -23,100 +23,132 @@ rules:
   # Extends
   extends-before-mixins: 2
   extends-before-declarations: 2
-  placeholder-in-extend: 0
+  placeholder-in-extend:
+    - 1
+    -
+      allow-leading-underscore: false
+      convention: hyphenatedbem
 
   # Mixins
-  mixins-before-declarations:
-    - 2
-    -
-      exclude: ['bem-e', 'bem-m'] # allow @include bem-e(), @include bem-m()
+  mixins-before-declarations: 1
 
   # Line Spacing
-  one-declaration-per-line: 2
-  empty-line-between-blocks: 2
-  single-line-per-selector: 2
+  one-declaration-per-line: 1
+  empty-line-between-blocks:
+    - 1
+    -
+      include: true
+      allow-single-line-rulesets: true
+  single-line-per-selector: 0
 
   # Disallows
-  no-attribute-selectors: 0
+  no-attribute-selectors: 1
   no-color-hex: 0
   no-color-keywords: 1
   no-color-literals:
-    - 0
-    - allow-rgba: true
+    - 1
+    -
+      allow-rgba: true
+      allow-variable-identifiers: true
   no-combinators: 0
   no-css-comments: 0
   no-debug: 1
   no-disallowed-properties: 0
   no-duplicate-properties:
-  - 1
-  -
-    exclude: ['margin', 'border', 'padding'] # allow @margin, border, padding
-  no-empty-rulesets:
-    - 0
-    - include: false
-  no-extends: 0
+    - 1
+    -
+      exclude:
+        - display
+  no-empty-rulesets: 1
+  no-extends: 1
   no-ids: 1
   no-important: 1
   no-invalid-hex: 2
   no-mergeable-selectors: 1
   no-misspelled-properties: 1
   no-qualifying-elements:
-    - 0
-    - include: false
-  no-trailing-whitespace: 2
+    - 1
+    -
+      allow-element-with-attribute: false
+      allow-element-with-class: false
+      allow-element-with-id: false
+  no-trailing-whitespace: 1
   no-trailing-zero: 1
   no-transition-all: 1
-  no-universal-selectors: 0
-  no-url-domains: 2
-  no-url-protocols: 2
-  no-warn: 1
-  property-units: 0
+  no-universal-selectors: 1
+  no-url-domains: 1
+  no-url-protocols: 1
+  no-warn: 0
+  property-units:
+    - 1
+    -
+      global: rem
+      per-property: {transition: ['ms', 's'], width: ['rem', '%']}
 
   # No Vendor Prefixes
-  #no-selector-vendor-prefix: 1
-  #no-property-vendor-prefix: 1
-  #no-value-vendor-prefix: 1
-  #no-media-feature-vendor-prefix: 1
-  #no-at-rule-vendor-prefix: 1
-  no-vendor-prefixes: 0
+  no-vendor-prefixes: 1
 
   # Nesting
   declarations-before-nesting: 2
-  force-attribute-nesting:
-    - 0
-    - include: false
-  force-element-nesting:
-    - 0
-    - include: false
-  force-pseudo-nesting:
-    - 0
-    - include: false
+  force-attribute-nesting: 1
+  force-element-nesting: 1
+  force-pseudo-nesting: 0
 
   # Name Formats
   class-name-format:
     - 1
-    - convention: hyphenatedbem
-  function-name-format: 1
+    -
+      convention: hyphenatedbem
+  function-name-format:
+    - 1
+    -
+      allow-leading-underscore: true
+      convention: hyphenatedlowercase
   id-name-format: 0
-  mixin-name-format: 1
-  placeholder-name-format: 1
+  mixin-name-format:
+    - 1
+    -
+      allow-leading-underscore: false
+      convention: hyphenatedlowercase
+  placeholder-name-format:
+    - 1
+    -
+      allow-leading-underscore: false
+      convention: hyphenatedbem
   variable-name-format: 1
 
   # Style Guide
   attribute-quotes: 2
-  bem-depth: 0
-  border-zero: 2
-  brace-style: 0 # temporarily disabled due to conflict with multiple single line rules
-  clean-import-paths: 1
-  empty-args:
+  bem-depth:
     - 1
-    - include: true
-  hex-length: 2
-  hex-notation: 2
+    -
+      max_elements: 3
+  border-zero: # 2
+    - 1
+    -
+      convention: none
+  brace-style: # 0 temporarily disabled due to conflict with multiple single line rules
+    - 1
+    -
+      style: stroustrup
+  clean-import-paths: 1
+  empty-args: 0
+  hex-length: # 2
+    - 1
+    -
+      style: short
+  hex-notation: # 2
+    - 1
+    -
+      style: lowercase
   indentation: # no alert due to non-support for indents on property lists
-    - 0
-    - size: 4
-  leading-zero: 2
+    - 1
+    -
+      size: 2
+  leading-zero: # 2
+    - 1
+    -
+      include: false
   max-line-length: 0
   max-file-line-count: 0
   nesting-depth:
@@ -410,24 +442,45 @@ rules:
         - 'unicode-bidi'
         - 'speak'
   pseudo-element: 1
-  quotes: 2
-  shorthand-values: 1
+  quotes:
+    - 1
+    -
+      style: single
+  shorthand-values:
+    - 1
+    -
+      allowed-shorthands:
+        - 1
+        - 2
+        - 3
   url-quotes: 1
-  variable-for-property: 0
-  zero-unit: 2
+  variable-for-property:
+    - 1
+    -
+      properties:
+        - 'color'
+        - 'background-color'
+      allow-map-get: true
+      allowed-functions:
+        - 'rgba'
+        - 'get-shade'
+        - 'nth'
+      allow-variable-identifiers: true
+  zero-unit:
+    - 1
+    -
+      include: false
 
   # Inner Spacing
-  space-after-comma: 0 # disabled due to conflict with RGBA comma spacing
-  space-before-colon: 2
-  space-after-colon: 2
-  space-before-brace: 2
-  space-before-bang: 2
-  space-after-bang:
-    - 2
-    - include: true
+  space-after-comma: 1 # disabled due to conflict with RGBA comma spacing
+  space-before-colon: 1
+  space-after-colon: 1
+  space-before-brace: 1
+  space-before-bang: 1
+  space-after-bang: 1
   space-between-parens: 2
-  space-around-operator: 2
+  space-around-operator: 1
 
-  # Final Items
-  trailing-semicolon: 2
-  final-newline: 2
+  # # Final Items
+  trailing-semicolon: 1
+  final-newline: 1
