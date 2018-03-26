@@ -1,13 +1,11 @@
 # Front-End Coding Standards (HTML & CSS)
 
 This document is copied and adapted from [o3w-frontend-guidelines
-](https://github.com/o3world/o3w-frontend-guidelines) to meet ACU's Applications Team requirements and preferences.
-
-It outlines a reasonable style guide for CSS development. These guidelines strongly encourage the use of existing, common, sensible patterns. They should be adapted as needed to create your own style guide.
+](https://github.com/o3world/o3w-frontend-guidelines) to meet ACU's Applications Team requirements and preferences. It outlines a reasonable style guide for CSS development. These guidelines strongly encourage the use of existing, common, sensible patterns.
 
 ## Introduction
 
-This is a living document of Best Practices and Code Standards for Front-End Development at [ACU](http://www.acu.edu.au). The Development Team is encouraged to test, discuss, and evolve what is documented here together as best practices change and new ideas are shared. **Please implement and enforce these agreed upon standards in your own builds and in code reviews at all times for all projects.**
+This is a living document of Best Practices and Code Standards for Front-End Development at [ACU](http://www.acu.edu.au). The Applications Team is encouraged to test, discuss, and evolve what is documented here together as best practices change and new ideas are shared. **Please implement and enforce these agreed upon standards in your own builds and in code reviews at all times for all projects.**
 
 > Well-formed markup is made up of part standards and part agreed upon preferences by a team of developers. Along with consistency, both are important in creating maintainable, readable code for everybody.
 
@@ -846,33 +844,29 @@ Well commented code is extremely important. Take time to describe components, ho
   * A title
   * A description _(where necessary)_
   * `markup:` Full HTML markup for the component.
-  * A list of modifier classes
+  * A list of modifier classes and their descriptions
   * `styleguide:` line to define where in the style guide's hierarchy the documentation should sit.
-* Use scss style comments to 
+* Use single line Sass style comments to explain browser hacks or non-standard functionality.
 
 ```css
-/*
- * Comment Header
+/**
+ * Buttons
  *
- *****************************************************************************/
+ * Overriding bootstrap rounded corner buttons
+ *
+ * markup:
+ *   <a href="#" class="btn {{modifier_class}}">Submit</a>
+ *   <input type="submit" class="btn {{modifier_class}}" value="submit" name="submit" />
+ *   <button class="btn {{modifier_class}}">Submit</button>
+ *
+ * .btn-primary - Primary button on a page (should only be used once)
+ * .btn-secondary - Secondary buttons (other important buttons)
+ * .btn-default - Less important buttons.
+ *
+ * Styleguide: Foundations.Buttons
+ */
 
-/*
- * Detailed Comment Header
- *
- * This is some text the describes, in detail, how the below SCSS works, any
- limitations, and the way it is constructed.
- *
- * 1. Targeted notations can be included as well if inline comments aren't
- sufficient to outline functionality
- *
- *****************************************************************************/
-
-/*
- * Child Comment
- *
- *********************************************************/
-
-/* Single line comment */
+// scss comment to explain a browser hack or override.
 ```
 
 Pre-formatted comment chunks can be setup within most IDEs and tied to a keyboard shortcut to more easily apply consistent formatting.
