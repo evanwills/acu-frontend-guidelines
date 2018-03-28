@@ -83,7 +83,7 @@ rules:
     - 1
     -
       global: rem
-      per-property: {transition: ['ms', 's'], width: ['rem', '%']}
+      per-property: {transition: ['ms', 's'], width: ['rem', '%'], min-width: ['em', 'rem'], max-width: ['em', 'rem'], height: ['rem'], min-height: ['em', 'rem'], max-height: ['em', 'rem']}
 
   # No Vendor Prefixes
   no-vendor-prefixes: 1
