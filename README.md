@@ -828,11 +828,13 @@ Everything else takes place inside the component or without impacting the previo
 _NOTE: A comprehensive property order breakdown can be viewed in the custom `.sass-lint.yml` file. Properties that are delared out of the order defined in this file will be flagged with a warning during linting._
 
 <a name="pixels-ems-rems-for-typography"></a>
-### Pixels vs. EMs vs. REMs for Typography
+### Pixels vs. EMs vs. REMs
 
-Use REMs with a pixel fallback for `font-size`, because it offers absolute control over text. Additionally, a unitless `line-height` is preferred because it does not inherit a percentage value of its parent element, but instead is based on a multiplier of the `font-size`.
+Use `REM`s or `EM`s for all size related CSS properties, because leaves control of font-size to the user. You just sizes relative to the font size. It's better for accessiblity and designs should be more consistent. Additionally, a unitless `line-height` is preferred because it does not inherit a percentage value of its parent element, but instead is based on a multiplier of the `font-size`.
 
-_`font-size` and `line-height` mixins are available and will generate a REM value with a Pixel fallback._
+_Use [PostCSS](https://github.com/postcss/postcss) for `REM` to `EM`/`PX` fallbacks_
+
+Use EMs for media queries to ensure compatibility and accessibility. (See: [PX, EM or REM Media Queries?](https://zellwk.com/blog/media-query-units/))
 
 <a name="scss-comments"></a>
 ### Comments
@@ -866,10 +868,12 @@ Well commented code is extremely important. Take time to describe components, ho
  * Styleguide: Foundations.Buttons
  */
 
-// scss comment to explain a browser hack or override.
+// scss comment to explain a browser hack or override. (ignored by KSS)
 ```
 
 Pre-formatted comment chunks can be setup within most IDEs and tied to a keyboard shortcut to more easily apply consistent formatting.
+
+__NOTE:__ Our implementation of KSS parses generated CSS to allow Sass to do some of our documentation for us. So, _always_ use CSS comments for style guide documentation.
 
 <a name="class-naming-conventions"></a>
 ### Class Naming Conventions
@@ -1115,11 +1119,16 @@ root = true
 # applied to all files
 [*]
 indent_style = space
-indent_size = 4
+indent_size = 2
 end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
+
+[*.html]
+indent_style = tab
+indent_size = 4
+insert_final_newline = false
 
 [*.md]
 trim_trailing_whitespace = false
@@ -1136,8 +1145,21 @@ indent_style = space
 
 These Code Standards are the culmination of research into best practices as well as input from the Development team. Specifics are adapted from various sources, including:
 
+* [Atomic design](http://atomicdesign.bradfrost.com/)
+* [BEM](http://getbem.com/introduction/)
 * [Front-End Guidelines](https://github.com/bendc/frontend-guidelines)
 * [Idiomatic CSS](https://github.com/necolas/idiomatic-css)
 * [Code Guide](http://codeguide.co/)
+* [KSS style guide generator](https://github.com/kss-node/kss-node/wiki/Quick-Start-Guide)
 * [SASS Style Guide](https://css-tricks.com/sass-style-guide/)
 * [SASS Guidelines](https://sass-guidelin.es/)
+* Web Content Accessibility Guidelines 2.x
+  * [WCAG 2.0 at a Glance](https://www.w3.org/WAI/WCAG20/glance/)
+  * [WCAG 2.0 Quick reference](https://www.w3.org/WAI/WCAG20/quickref/)
+  * [Requirements for WCAG 2.0 Checklists and Techniques](https://www.w3.org/TR/wcag2-tech-req/)
+  * [WCAG 2.1](https://www.w3.org/TR/WCAG21/)
+
+<a name="background-reading"></a>
+## Background reading
+* [EM vs REM vs PX – Why you shouldn't “just use pixels”](https://engageinteractive.co.uk/blog/em-vs-rem-vs-px)
+* [PX, EM or REM Media Queries?](https://zellwk.com/blog/media-query-units/)
