@@ -1064,7 +1064,7 @@ An image that has informational value should be a part of the markup and include
 
 If an image is purely decorative (it provides no content value other than visual flair to the page) then a `background-image` is appropriate. An inline image can also be used, but with the appropriate ARIA and `role` attributes applied.
 
-`<img src="../path/to/image/file.jpg" alt="" aria-hidden="true" role="presentation"`
+`<img src="../path/to/image/file.jpg" alt="" aria-hidden="true" role="presentation" />`
 
 These attributes should also be applied when defining an inline SVG icon that is used for presentational purposes only. [Learn More about SVG Accessibility](#accessibility).
 
